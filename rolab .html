@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Noël 2025 !</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS intégré pour simplifier */
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff0000, #006400);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        #wish {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #new-wish {
+            padding: 0.8rem 1.5rem;
+            font-size: 1.2rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #new-wish:hover {
+            background-color: #45a049;
+        }
+
+        /* Effet de neige */
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 1.5rem;
+            animation: fall linear infinite;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <div id="snowflakes"></div>
+    <div class="container">
+        <h1 id="wish" class="animate__animated"></h1>
+        <button id="new-wish">Un autre vœu !</button>
+    </div>
+
+    <!-- Particles.js pour les effets de fond -->
+    <div id="particles-js"></div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Configuration de Particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 100 },
+                color: { value: "#ffffff" },
+                shape: { type: "star" },
+                opacity: { value: 0.7 },
+                size: { value: 3 },
+                move: { enable: true, speed: 2 }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" }
+                }
+            }
+        });
+
+        // Liste de messages de Noël
+        const messages = [
+            "Joyeux Noël et meilleure année 2026 ! 🎄",
+            "Que cette fête soit remplie de magie et de bonheur ! ✨",
+            "Passez un Noël chaleureux entouré de ceux que vous aimez ! ❤️",
+            "Que vos jours soient aussi lumineux que les guirlandes de Noël ! 💡",
+            "Noël, c’est la saison où le cœur parle plus fort que la raison. 🎁",
+            "Que cette année soit aussi douce qu’un flocon de neige ! ❄️",
+            "Un Noël rempli de rires, de joie et de moments inoubliables ! 😊",
+            "Que la paix et l’amour illuminent votre foyer cette année. 🕯️",
+            "Noël, c’est la magie de croire en l’invisible. 🌟",
+            "Que vos rêves se réalisent en 2026 ! 🌠"
+        ];
+
+        // Liste de styles pour les messages
+        const styles = [
+            { color: "#FFD700", fontFamily: "'Dancing Script', cursive" },
+            { color: "#FFFFFF", fontFamily: "'Pacifico', cursive" },
+            { color: "#FF6347", fontFamily: "'Roboto', sans-serif" },
+            { color: "#00FA9A", fontFamily: "'Roboto', sans-serif" },
+            { color: "#1E90FF", fontFamily: "'Dancing Script', cursive" }
+        ];
+
+        // Liste d'animations (via Animate.css)
+        const animations = [
+            "animate__fadeIn", "animate__bounce", "animate__zoomIn",
+            "animate__flipInX", "animate__lightSpeedInRight"
+        ];
+
+        // Fonction pour afficher un vœu aléatoire
+        function displayRandomWish() {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            const randomStyle = styles[Math.floor(Math.random() * styles.length)];
+            const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+
+            const wishElement = document.getElementById("wish");
+            wishElement.textContent = randomMessage;
+            wishElement.style.color = randomStyle.color;
+            wishElement.style.fontFamily = randomStyle.fontFamily;
+            wishElement.className = "animate__animated " + randomAnimation;
+        }
+
+        // Afficher un vœu au chargement de la page
+        window.onload = function() {
+            displayRandomWish();
+            createSnowflakes();
+        };
+
+        // Bouton pour changer de vœu
+        document.getElementById("new-wish").addEventListener("click", displayRandomWish);
+
+        // Fonction pour créer des flocons de neige
+        function createSnowflakes() {
+            const snowflakesContainer = document.getElementById("snowflakes");
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement("div");
+                snowflake.className = "snowflake";
+                snowflake.textContent = "❄";
+                snowflake.style.left = Math.random() * 100 + "vw";
+                snowflake.style.animationDuration = (Math.random() * 10 + 5) + "s";
+                snowflake.style.animationDelay = Math.random() * 5 + "s";
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+    </script>
+</body>
+</html>
